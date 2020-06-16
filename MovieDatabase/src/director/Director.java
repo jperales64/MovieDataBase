@@ -46,5 +46,10 @@ public class Director {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String toString() {
+		String str = getFirstName() + " " + getLastName();
+		return str;
+	}
 
 }

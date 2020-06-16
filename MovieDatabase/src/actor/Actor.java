@@ -52,5 +52,8 @@ public class Actor {
 		this.lastName = lastName;
 	}
 	
-	
+	public String toString() {
+		String str = getFirstName() + " " + getLastName();
+		return str;
+	}
 }
