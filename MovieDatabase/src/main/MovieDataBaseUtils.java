@@ -41,26 +41,24 @@ public class MovieDataBaseUtils {
 		Film newFilm;
 		String title = "";
 		Actor[] leadActors;
-		int numOfLeadActors;
+		int numOfLeadActors = -1;
 		Actor[] supActors = new Actor[10];
 		int numberOfSupActors;
 		Director[] directors;
 		int numOfDirs;
 		int rating;
-		
+
 		System.out.println("New movie entry!");
-		
+
 		System.out.println("Enter the title of the film");
-		
+
 		title = sc.nextLine();
+
+		numOfLeadActors = getNumberOfLeadActors();
 		
-		System.out.println(title);
-		
-		
-		System.out.println("How many lead actors?");
-		numOfLeadActors = sc.nextInt();
+
 		leadActors = new Actor[numOfLeadActors];
-		for(int i = 0; i < numOfLeadActors; i++) {
+		for (int i = 0; i < numOfLeadActors; i++) {
 			String firstName, lastName;
 			Actor temp = null;
 			System.out.println("Enter actor's first name");
@@ -69,13 +67,13 @@ public class MovieDataBaseUtils {
 			lastName = sc.next();
 			temp = new Actor(firstName, lastName);
 			leadActors[i] = temp;
-			
+
 		}
-		
+
 		System.out.println("How many supporting actors?");
 		numberOfSupActors = sc.nextInt();
 		supActors = new Actor[numberOfSupActors];
-		for(int i = 0; i < numberOfSupActors; i++) {
+		for (int i = 0; i < numberOfSupActors; i++) {
 			String firstName, lastName;
 			Actor temp = null;
 			System.out.println("Enter actor's first name");
@@ -84,13 +82,13 @@ public class MovieDataBaseUtils {
 			lastName = sc.next();
 			temp = new Actor(firstName, lastName);
 			supActors[i] = temp;
-			
+
 		}
-		
+
 		System.out.print("How many directors?");
 		numOfDirs = sc.nextInt();
 		directors = new Director[numOfDirs];
-		for(int i = 0; i < numOfDirs; i++) {
+		for (int i = 0; i < numOfDirs; i++) {
 			String firstName, lastName;
 			Director temp = null;
 			System.out.println("Enter actor's first name");
@@ -99,15 +97,30 @@ public class MovieDataBaseUtils {
 			lastName = sc.next();
 			temp = new Director(firstName, lastName);
 			directors[i] = temp;
-			
+
 		}
-		
+
 		System.out.println("What is your rating?");
 		rating = sc.nextInt();
 		newFilm = new Film(title, leadActors, supActors, directors, rating);
 		System.out.println(newFilm.toString());
-		
-	
+
+	}
+	/**
+	 * Retrieves number of actors
+	 * @return
+	 */
+	private int getNumberOfLeadActors() {
+		int numOfLeadActors = -1;
+		do {
+			System.out.println("How many lead actors?");
+			while (!sc.hasNextInt()) {
+				System.out.println("That's not a number!");
+				sc.next(); // this is important!
+			}
+			numOfLeadActors = sc.nextInt();
+		} while (numOfLeadActors <= 0);
+		return numOfLeadActors;
 	}
 
 	/**
